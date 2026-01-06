@@ -112,20 +112,20 @@ def load_models_by_pattern(pattern):
 baseline_models = load_models_by_pattern("../inflated_baseline_peptide/inflated_baseline_peptide_fold_*.h5")
 # Load the 10 models per transfer learning method
 method1_models = load_models_by_pattern("../inflated_transfer_learning_smt_to_p/inflated_freeze_gnn_smile_mol_tox_to_peptide_fold_*.h5")
-# method2_models = load_models_by_pattern("../large_layers_transfer_learning_smt_to_p/LL_freeze_readout_smile_mol_tox_to_peptide_fold_*.h5")
-# method3_models = load_models_by_pattern("../large_layers_transfer_learning_smt_to_p/LL_freeze_all_smile_mol_tox_to_peptide_fold_*.h5")
+method2_models = load_models_by_pattern("../inflated_transfer_learning_smt_to_p/inflated_freeze_readout_smile_mol_tox_to_peptide_fold_*.h5")
+method3_models = load_models_by_pattern("../inflated_transfer_learning_smt_to_p/inflated_freeze_all_smile_mol_tox_to_peptide_fold_*.h5")
 method4_models = load_models_by_pattern("../inflated_transfer_learning_smt_to_p/inflated_gradual_unfreezing_smile_mol_tox_to_peptide_fold_*.h5")
 # Print the sizes of all model lists
 print(f"Number of baseline models loaded: {len(baseline_models)}")
 print(f"Number of method1 models loaded: {len(method1_models)}")
-# print(f"Number of method2 models loaded: {len(method2_models)}")
-# print(f"Number of method3 models loaded: {len(method3_models)}")
+print(f"Number of method2 models loaded: {len(method2_models)}")
+print(f"Number of method3 models loaded: {len(method3_models)}")
 print(f"Number of method4 models loaded: {len(method4_models)}")
 
 baseline_models = sorted(baseline_models, key=lambda x: extract_fold_number(x[0]))
 method1_models = sorted(method1_models, key=lambda x: extract_fold_number(x[0]))
-# method2_models = sorted(method2_models, key=lambda x: extract_fold_number(x[0]))
-# method3_models = sorted(method3_models, key=lambda x: extract_fold_number(x[0]))
+method2_models = sorted(method2_models, key=lambda x: extract_fold_number(x[0]))
+method3_models = sorted(method3_models, key=lambda x: extract_fold_number(x[0]))
 method4_models = sorted(method4_models, key=lambda x: extract_fold_number(x[0]))
 
 gen = PaddedGraphGenerator(graphs=graphs)
@@ -149,8 +149,8 @@ for fold_idx, fold in enumerate(splits, start=1):
     model_groups = {
         "baseline": baseline_models,
         "method1": method1_models,
-        # "method2": method2_models,
-        # "method3": method3_models,
+        "method2": method2_models,
+        "method3": method3_models,
         "method4": method4_models,
     }
     
@@ -198,7 +198,7 @@ import numpy as np
 # Dictionary to store summary stats for each model group
 metrics_summary = {}
 
-model_groups = ["baseline", "method1", "method4"]
+model_groups = ["baseline", "method1", "method2", "method3", "method4"]
 metrics_list = ["ROC_AUC", "GM", "Precision", "Recall", "F1", "MCC"]
 
 for group in model_groups:
@@ -220,7 +220,7 @@ for group in model_groups:
         print(f" {metric}: Mean = {mean_val:.4f}, Std = {std_val:.4f}")
 
 # Define model groups and metric names
-model_groups = ["baseline", "method1", "method4"]
+model_groups = ["baseline", "method1", "method2", "method3", "method4"]
 metric_names = ["ROC_AUC", "GM", "Precision", "Recall", "F1", "MCC"]
 
 # Build a fold_results dictionary keyed by model group
