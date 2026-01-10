@@ -27,7 +27,8 @@ import matplotlib.pyplot as plt
 ######################################
 # 1. Load or Generate Preprocessed Data
 ######################################
-PROCESSED_DATA_FILE = "overtrained_peptide_graphs.pkl"
+# PROCESSED_DATA_FILE = "overtrained_peptide_graphs.pkl"
+PROCESSED_DATA_FILE = "large_layers_overtrained_peptide.pkl" 
 
 if os.path.exists(PROCESSED_DATA_FILE):
     print("Učitavam prethodno spremljene podatke iz:", PROCESSED_DATA_FILE)
@@ -202,4 +203,4 @@ history = model.fit(
     callbacks=[callback]
 )
 
-model.save('overtrained_peptide_model.h5')
+model.save('extra_features_overtrained_peptide_model.h5')
