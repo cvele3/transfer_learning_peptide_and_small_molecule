@@ -76,10 +76,17 @@ else:
 
     # Definiraj fiksni vokabular s 27 elemenata
     element_to_index = {
-        "N": 0, "C": 1, "O": 2, "F": 3, "Cl": 4, "S": 5, "Na": 6, "Br": 7,
-        "Se": 8, "I": 9, "Pt": 10, "P": 11, "Mg": 12, "K": 13, "Au": 14,
-        "Ir": 15, "Cu": 16, "B": 17, "Zn": 18, "Re": 19, "Ca": 20, "As": 21,
-        "Hg": 22, "Ru": 23, "Pd": 24, "Cs": 25, "Si": 26,
+        "*": 0, "Ac": 1, "Ag": 2, "Al": 3, "Am": 4, "Ar": 5, "As": 6, "Au": 7,
+        "B": 8, "Ba": 9, "Be": 10, "Bi": 11, "Br": 12, "C": 13, "Ca": 14,
+        "Cd": 15, "Ce": 16, "Cl": 17, "Co": 18, "Cr": 19, "Cs": 20, "Cu": 21,
+        "F": 22, "Fe": 23, "Ga": 24, "Gd": 25, "Ge": 26, "H": 27, "Hg": 28,
+        "I": 29, "In": 30, "K": 31, "La": 32, "Li": 33, "Mg": 34, "Mn": 35,
+        "Mo": 36, "N": 37, "Na": 38, "Nb": 39, "Ni": 40, "Np": 41, "O": 42,
+        "P": 43, "Pb": 44, "Pd": 45, "Po": 46, "Pt": 47, "Pu": 48, "Ra": 49,
+        "Rb": 50, "Re": 51, "Rn": 52, "S": 53, "Sb": 54, "Se": 55, "Si": 56,
+        "Sn": 57, "Sr": 58, "Ta": 59, "Tb": 60, "Te": 61, "Th": 62, "Ti": 63,
+        "Tl": 64, "U": 65, "V": 66, "W": 67, "Y": 68, "Yb": 69, "Zn": 70,
+        "Zr": 71,
     }
     NUM_FEATURES = len(element_to_index)
     print("\nFixed vocabulary (27 elements) =", element_to_index)
