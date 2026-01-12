@@ -252,17 +252,45 @@ for metric in metric_names:
     # Kreiraj boxplot za vizualizaciju
     df_melted = df_metric.melt(var_name="Model", value_name=metric)
     plt.figure(figsize=(10, 6))
-    sns.boxplot(x="Model", y=metric, data=df_melted)
+    # Dodan parametar 'palette' za različite boje i 'hue' da se izbjegne upozorenje
+    sns.boxplot(x="Model", y=metric, data=df_melted, hue="Model", palette="Set2", legend=False)
     plt.title(f"Box-and-Whisker Plot for {metric}")
     plt.xlabel("Model", fontsize=10)
     plt.ylabel(metric, fontsize=10)
-    plt.show()
+    
+    # Save the boxplot automatically
+    box_plot_filename = f"box_whisker_{metric.lower()}_plot.png"
+    plt.savefig(box_plot_filename, dpi=300, bbox_inches='tight')
+    print(f"Saved boxplot to {box_plot_filename}")
+    plt.close() # Close plot to free memory
+    # plt.show() # Removed show() to focus on saving
     
     # Ako je Friedman test značajan, provedi Nemenyi post hoc test
     if p_value < 0.05:
         nemenyi_results = sp.posthoc_nemenyi_friedman(df_metric)
         print(f"\nPost Hoc Nemenyi Test Results for {metric}:")
         print(pd.DataFrame(nemenyi_results, index=df_metric.columns, columns=df_metric.columns))
+        
+        # Vizualizacija Nemenyi p-vrijednosti pomoću Heatmap-a
+        plt.figure(figsize=(10, 8))
+        # Koristimo masku da sakrijemo gornji trokut (jer je simetrično)
+        mask = np.triu(np.ones_like(nemenyi_results, dtype=bool))
+        
+        # heatmap: p < 0.05 je značajno.
+        # cmap="Reds_r": Tamno crveno za niske vrijednosti (značajna razlika), bijelo za visoke (nema razlike)
+        sns.heatmap(nemenyi_results, annot=True, fmt=".3f", cmap="Reds_r", 
+                    mask=mask, vmin=0, vmax=0.1, cbar_kws={'label': 'p-value (0=Significant)'})
+        
+        plt.title(f"Nemenyi Post-hoc P-values for {metric}\n(Darker Red = Significant Difference p<0.05)")
+        plt.yticks(rotation=0) 
+        plt.tight_layout()
+        
+        # Save the heatmap automatically
+        heatmap_filename = f"heatmap_{metric.lower()}_plot.png"
+        plt.savefig(heatmap_filename, dpi=300, bbox_inches='tight')
+        print(f"Saved heatmap to {heatmap_filename}")
+        plt.close() # Close plot
+        # plt.show()
         
         # Odredi najbolji model prema srednjoj vrijednosti
         means = {model: np.mean(fold_results[model][metric]) for model in model_groups}

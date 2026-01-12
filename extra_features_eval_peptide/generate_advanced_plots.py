@@ -62,11 +62,11 @@ gen = PaddedGraphGenerator(graphs=graphs)
 # or 'transfer_learning_smt_to_p' if they share models?
 # Given I cannot browse endlessly, I will assume the paths based on folder names:
 model_groups = {
-    "Baseline": "../extra_features_baseline_peptide/extra_features_baseline_peptide_fold_*.h5",
-    "Method 1": "../transfer_learning_extra_features_smt_to_p/extra_features_freeze_gnn_smile_mol_tox_to_peptide_fold_*.h5",
-    "Method 2": "../transfer_learning_extra_features_smt_to_p/extra_features_freeze_readout_smile_mol_tox_to_peptide_fold_*.h5",
-    "Method 3": "../transfer_learning_extra_features_smt_to_p/extra_features_freeze_all_smile_mol_tox_to_peptide_fold_*.h5",
-    "Method 4": "../transfer_learning_extra_features_smt_to_p/extra_features_gradual_unfreezing_smile_mol_tox_to_peptide_fold_*.h5"
+    "Baseline": "../extra_features_baseline_peptide/baseline_peptide_fold_*.h5",
+    "Method 1": "../transfer_learning_extra_features_smt_to_p/freeze_gnn_small_mol_tox_to_peptide_fold_*.h5",
+    "Method 2": "../transfer_learning_extra_features_smt_to_p/freeze_readout_small_mol_tox_to_peptide_fold_*.h5",
+    "Method 3": "../transfer_learning_extra_features_smt_to_p/freeze_all_small_mol_tox_to_peptide_fold_*.h5",
+    "Method 4": "../transfer_learning_extra_features_smt_to_p/gradual_unfreezing_small_mol_tox_to_peptide_fold_*.h5"
 }
 # Note: I am guessing the "transfer_learning_extra_features_smt_to_p" path name based on "transfer_learning_extra_features_p_to_smt" existence in file list.
 # And assuming file prefix "extra_features_".

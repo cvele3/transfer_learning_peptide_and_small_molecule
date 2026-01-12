@@ -213,26 +213,6 @@ for group in model_groups:
         std_val = metrics_summary[group][metric]["std"]
         print(f" {metric}: Mean = {mean_val:.4f}, Std = {std_val:.4f}")
 
-# --- VIZUALIZACIJA SUMMARY PODATAKA ---
-# Prikazujemo Mean (visina stupca) i Std (crta/whisker) za svaku metriku i svaki model
-# Ovo vizualno prikazuje točno one brojeve koje ste upravo ispisali u tablici iznad
-plot_data = []
-for fold_idx in results:
-    for group in model_groups:
-        for metric in metrics_list:
-            val = results[fold_idx][group][metric]
-            plot_data.append({"Fold": fold_idx, "Model": group, "Metric": metric, "Value": val})
-
-df_plot = pd.DataFrame(plot_data)
-
-plt.figure(figsize=(14, 7))
-# errorbar='sd' automatski računa i crta standardnu devijaciju
-sns.barplot(data=df_plot, x="Metric", y="Value", hue="Model", errorbar="sd", capsize=.1, palette="viridis")
-plt.title("Performance Comparison: Mean Metrics with Standard Deviation (Error Bars)")
-plt.ylabel("Metric Value")
-plt.legend(bbox_to_anchor=(1.01, 1), loc='upper left', borderaxespad=0.)
-plt.tight_layout()
-plt.show()
 
 # Define model groups and metric names
 model_groups = ["baseline", "method1", "method2", "method3", "method4"]
@@ -278,7 +258,13 @@ for metric in metric_names:
     plt.title(f"Box-and-Whisker Plot for {metric}")
     plt.xlabel("Model", fontsize=10)
     plt.ylabel(metric, fontsize=10)
-    plt.show()
+    
+    # Save the boxplot automatically
+    box_plot_filename = f"box_whisker_{metric.lower()}_plot.png"
+    plt.savefig(box_plot_filename, dpi=300, bbox_inches='tight')
+    print(f"Saved boxplot to {box_plot_filename}")
+    plt.close() # Close plot to free memory
+    # plt.show() # Removed show() to focus on saving
     
     # Ako je Friedman test značajan, provedi Nemenyi post hoc test
     if p_value < 0.05:
@@ -299,7 +285,13 @@ for metric in metric_names:
         plt.title(f"Nemenyi Post-hoc P-values for {metric}\n(Darker Red = Significant Difference p<0.05)")
         plt.yticks(rotation=0) 
         plt.tight_layout()
-        plt.show()
+        
+        # Save the heatmap automatically
+        heatmap_filename = f"heatmap_{metric.lower()}_plot.png"
+        plt.savefig(heatmap_filename, dpi=300, bbox_inches='tight')
+        print(f"Saved heatmap to {heatmap_filename}")
+        plt.close() # Close plot
+        # plt.show()
 
         # Odredi najbolji model prema srednjoj vrijednosti
         means = {model: np.mean(fold_results[model][metric]) for model in model_groups}
