@@ -264,6 +264,21 @@ for metric in metric_names:
         print(f"\nPost Hoc Nemenyi Test Results for {metric}:")
         print(pd.DataFrame(nemenyi_results, index=df_metric.columns, columns=df_metric.columns))
         
+        # Vizualizacija Nemenyi p-vrijednosti pomoću Heatmap-a
+        plt.figure(figsize=(10, 8))
+        # Koristimo masku da sakrijemo gornji trokut (jer je simetrično)
+        mask = np.triu(np.ones_like(nemenyi_results, dtype=bool))
+        
+        # heatmap: p < 0.05 je značajno.
+        # cmap="Reds_r": Tamno crveno za niske vrijednosti (značajna razlika), bijelo za visoke (nema razlike)
+        sns.heatmap(nemenyi_results, annot=True, fmt=".3f", cmap="Reds_r", 
+                    mask=mask, vmin=0, vmax=0.1, cbar_kws={'label': 'p-value (0=Significant)'})
+        
+        plt.title(f"Nemenyi Post-hoc P-values for {metric}\n(Darker Red = Significant Difference p<0.05)")
+        plt.yticks(rotation=0) 
+        plt.tight_layout()
+        plt.show()
+
         # Odredi najbolji model prema srednjoj vrijednosti
         means = {model: np.mean(fold_results[model][metric]) for model in model_groups}
         best_model = max(means, key=means.get)
