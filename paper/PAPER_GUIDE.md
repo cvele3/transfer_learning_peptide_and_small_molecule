@@ -29,11 +29,42 @@
 | `paper/Jakov_Cvetko___Transfer_Learning/` | Overleaf Springer Nature template files (`sn-article.tex`, `sn-jnl.cls`, `sn-bibliography.bib`, BST styles, sample eps/pdf) + **`paper_draft.tex`** (working draft with Introduction written, Nature Machine Intelligence format) | **THE manuscript** — `paper_draft.tex` is the active writing file; `sn-article.tex` is the original template reference |
 | `paper/introduction/` | 4 markdown drafts (`proces-version-a.md` through `d.md`) documenting the project pipeline end-to-end | Reference material for writing Introduction and Methods sections |
 | `paper/comparison/` | `toxinPred-v1.pdf` — the ToxinPred scientific paper by Gupta et al. (2013) | **Writing style reference** — demonstrates scientific, concise, informative but not overly detailed writing |
+| `paper/example-works/` | **⚠️ CRITICAL STYLE REFERENCE** — Two published Nature Machine Intelligence papers (see Section 2.1.1 below) | **PRIMARY writing-style and structure reference** — these papers define how every section should be written, structured, and formatted |
 | `paper/images/` | Pre-collected images and data for the paper: `project-diagram.png`, `side-by-side-models-boxes.png`, `radar_plots_peptide_median.png`, `radar_plots_smt_median.png`, `eval-book-peptide-results.xlsx`, `eval-book-smt-results.xlsx`, `dataset_analysis_results.md` | **Ready-to-use paper assets** — curated subset of project outputs gathered in one place for convenience |
 | `paper/questions/` | `questions-to-be-asnwerd-in-paper.txt` — the 6 formal research questions (in Croatian) that the paper must answer | **Defines the paper's scope** — every section should contribute to answering these questions (see Section 3.1) |
 | `paper/chapters/` | `chapters_plan.txt` — detailed section-by-section plan for Nature Machine Intelligence format, figure/table plans, writing rules | **Blueprint** for the paper structure, compared against ToxinPred format |
 | `paper/official-task/` | `task-zavrsni-Jakov-Cvetko.pdf` — official diploma thesis task assignment from the University of Rijeka (dated 14.03.2025) | **Scope anchor** — defines the formal task: investigate toxicity of small molecules and peptides, optimise a neural network architecture, analyse cross-domain transfer learning, evaluate and compare with literature. Mentor: prof. Goran Mauša, Co-mentor: dr. sc. Erik Otović |
 | `paper/PAPER_GUIDE.md` | This file | Master context file for LLM-assisted paper writing |
+
+#### 2.1.1 Example papers from Nature Machine Intelligence (`paper/example-works/`) — ⚠️ MUST READ BEFORE WRITING
+
+This folder contains **two published Nature Machine Intelligence papers** that serve as the **definitive style, structure, and tone reference** for writing this manuscript. Every section of `paper_draft.tex` should be written as if these papers are the template.
+
+| File | Citation | DOI | Pages | Relevance |
+|------|----------|-----|-------|-----------|
+| `Reshaping the discovery of self-assembling.pdf` | Njirjak, Žužić, Babić, Janković, **Otović**, Kalafatovic & **Mauša** (2024) *Nat. Mach. Intell.* **6**, 1487–1500 | `10.1038/s42256-024-00928-1` | 19 | **HIGHEST PRIORITY** — co-authored by the thesis mentor (Mauša) and co-mentor (Otović). Defines the expected structure and writing style |
+| `Tailored structured peptide design with a.pdf` | Leyva, Torres, Oliva, de la Fuente-Nunez & Brizuela (2025) *Nat. Mach. Intell.* **7**, 1685–1697 | `10.1038/s42256-025-01119-2` | 16 | Confirms the same Nature MI article format; additional style reference |
+
+**Observed section structure from these papers:**
+
+| Paper | Main sections | Notes |
+|-------|--------------|-------|
+| Njirjak et al. (2024) | Introduction → **Results and discussion** → Conclusion → Methods | Results and Discussion **combined** into one section; Conclusion present; Methods at end |
+| Leyva et al. (2025) | Introduction → Results → Discussion → Methods | Separate Results and Discussion; no Conclusion; Methods at end |
+
+**Key structural patterns to follow:**
+- **Introduction** has no explicit `\section` heading in Nature MI — it flows directly after the abstract. However, in the Springer Nature template (`sn-jnl.cls`) it is fine to use `\section{Introduction}`.
+- **NO numbered subsections** (no `\subsection{1.1 ...}`). Use short **descriptive subheadings** within sections instead.
+- **Methods placed at the END**, after Discussion/Conclusion — this is mandatory for Nature format.
+- **Very lean top-level structure** — only 3–4 major `\section` headings in the entire paper.
+- **Figures and tables are interspersed** with the text where they are first referenced.
+- **Voice:** Both papers use "we" (multi-author). Since this paper has a solo author, use passive voice or "this study" / "the present work" instead.
+
+**For this paper (8-page limit), adopt the Njirjak et al. (2024) structure:**
+1. Introduction
+2. Results and discussion (combined)
+3. Conclusion
+4. Methods
 
 ### 2.2 Key project-level documentation files
 
@@ -203,7 +234,9 @@ These questions shape the entire paper narrative. Every section should explicitl
 
 The working draft is `paper/Jakov_Cvetko___Transfer_Learning/paper_draft.tex` using Nature Portfolio format (`sn-nature.bst`). The original template `sn-article.tex` is kept as reference.
 
-### Structure (Nature Machine Intelligence format)
+### Structure (Nature Machine Intelligence format — modelled after Njirjak et al. 2024)
+
+Based on the two example papers in `paper/example-works/`, the paper uses a **lean 4-section structure** with descriptive (not numbered) subheadings. No `\subsection{}` commands — use `\paragraph{}` or bold text for sub-topics within a section.
 
 | Section | LaTeX label | Content | Status |
 |---------|------------|---------|--------|
@@ -211,13 +244,13 @@ The working draft is `paper/Jakov_Cvetko___Transfer_Learning/paper_draft.tex` us
 | **Abstract** | `\abstract` | ~150–200 words: problem, approach, key findings, significance. No citations | TODO |
 | **Keywords** | `\keywords` | transfer learning, graph neural networks, molecular toxicity, DeepGraphCNN, cross-domain classification, peptide toxicity | DONE |
 | **1. Introduction** | `\section{Introduction}` | Motivation, problem statement, contribution summary (3 concise paragraphs) | DONE |
-| **2. Results** | `\section{Results}` | 3 tables (dataset + 2 results xlsx), 4 figures (PNGs from `paper/images/`), statistical tests | TODO |
-| **3. Discussion** | `\section{Discussion}` | Transfer direction effects, strategy behaviour, capacity influence, SVM comparison, limitations, answer RQ1–RQ6 | TODO |
+| **2. Results and discussion** | `\section{Results and discussion}` | Combined: tables, figures, interpretation, transfer direction effects, strategy behaviour, capacity influence, SVM comparison, statistical tests, answer RQ1–RQ6 | TODO |
+| **3. Conclusion** | `\section{Conclusion}` | Short (1 paragraph): key takeaways, practical implications, future directions | TODO |
 | **4. Methods** | `\section{Methods}` | Datasets, graph construction, architecture, TL strategies, SVM baseline, CV protocol, metrics, statistical tests (placed at end per Nature format) | TODO |
-| **Declarations** | `\section*{Declarations}` | Funding, competing interests, data/code availability, author contributions | Scaffold in place |
-| **References** | `\bibliography` | `sn-bibliography.bib` — needs to be populated with actual references | TODO |
+| **Backmatter** | `\bmhead` | Acknowledgements, Declarations (funding, competing interests, data/code availability, author contributions) | Scaffold in place |
+| **References** | `\bibliography` | `sn-bibliography.bib` — populated with 20 BibTeX entries | DONE |
 
-**Note:** Nature Machine Intelligence places Methods at the end, after Discussion. Results come before Discussion so the reader sees findings first.
+**Key rule:** Keep it to exactly **4 `\section{}` commands** in the body (Introduction, Results and discussion, Conclusion, Methods). Use descriptive subheadings within sections only when needed — prefer flowing prose. Follow the example papers in `paper/example-works/`.
 
 ---
 
@@ -310,27 +343,35 @@ Common: GNN activations all tanh, bias=False, MaxPool1D(2) between Conv1D layers
 
 ### 6.0 Page budget (8 pages total)
 
-The paper must not exceed **8 pages**. Approximate budget:
+The paper must not exceed **8 pages**. Approximate budget (following Njirjak et al. 2024 style):
 
 | Section | Target length |
 |---------|--------------|
 | Abstract | ~150–200 words |
 | Introduction | ~0.75 pages (3 short paragraphs) |
-| Results | ~2.5–3 pages (3 tables + 4 figures + brief narrative) |
-| Discussion | ~1–1.5 pages |
-| Methods | ~1.5–2 pages |
-| References + Declarations | ~0.5–1 page |
+| Results and discussion | ~3–3.5 pages (3 tables + 4 figures + interpretation woven together) |
+| Conclusion | ~0.25–0.5 pages (1 paragraph) |
+| Methods | ~2–2.5 pages (descriptive subheadings, no numbered subsections) |
+| References + Declarations | ~1 page |
 
-**Rule:** If a sentence can be cut without losing information, cut it. Merge related points. Avoid restating what tables and figures already show — reference them and state only the insight.
+**Rule:** If a sentence can be cut without losing information, cut it. Merge related points. Avoid restating what tables and figures already show — reference them and state only the insight. Combining Results and Discussion into one section (as Njirjak et al. 2024 does) saves space by avoiding repetition.
 
 ### 6.1 Style reference
 
-The paper in `paper/comparison/toxinPred-v1.pdf` (Gupta et al., ToxinPred) exemplifies the target writing style:
+**PRIMARY references:** The two Nature Machine Intelligence papers in `paper/example-works/` (see Section 2.1.1):
+- **Njirjak et al. (2024)** — co-authored by thesis mentor (Mauša) and co-mentor (Otović). **This is the #1 template.** Consult it before writing any section.
+- **Leyva et al. (2025)** — confirms the same format; additional style reference.
+
+**Secondary reference:** `paper/comparison/toxinPred-v1.pdf` (Gupta et al., ToxinPred, PLoS ONE 2013) — useful for scientific tone but uses a different journal format.
+
+Key style principles from the example papers:
 - **Scientific and concise** — every sentence carries information
 - **Informative but not overly detailed** — describe what was done and why, not every implementation detail
 - **Clear methodology flow** — dataset → features → model → evaluation → results
 - **Quantitative claims backed by numbers** — always include metric values when making claims
 - **Balanced discussion** — acknowledge limitations alongside findings
+- **Figures and tables integrated into narrative** — not dumped in a block; each is referenced and discussed where relevant
+- **Descriptive subheadings** within sections (not numbered) — e.g. "Building and fine-tuning the neural network models", "Testing and benchmarking the models"
 
 ### 6.2 Language conventions for this paper
 
@@ -386,27 +427,22 @@ The shared one-hot atom vocabulary size is **72 elements**. This is the GNN inpu
 ### 7.2 Currently active document class
 
 ```latex
-\documentclass[pdflatex,sn-mathphys-num]{sn-jnl}
+\documentclass[pdflatex,sn-nature]{sn-jnl}
 ```
 
-This selects Math and Physical Sciences Numbered Reference Style.
+This selects Nature Portfolio Numbered Reference Style (`sn-nature.bst`).
 
-### 7.3 Template sections to populate
+### 7.3 Working draft sections (`paper_draft.tex`)
 
-The current `sn-article.tex` has these section placeholders with boilerplate text:
-- `\title` — needs real title
-- `\author` — needs real author info (Jakov Cvetko + advisor)
-- `\affil` — needs real affiliation
-- `\abstract` — needs real abstract
-- `\keywords` — needs real keywords
-- `\section{Introduction}` — needs real introduction
-- `\section{Results}` — needs real results
-- `\section{Methods}` — needs real methods
-- `\section{Discussion}` — needs real discussion
-- `\section{Conclusion}` — needs real conclusion
-- `\bibliography{sn-bibliography}` — needs real bib entries
+The working draft `paper_draft.tex` (NOT `sn-article.tex`) has 4 body sections:
+- `\section{Introduction}` — DONE (3 paragraphs)
+- `\section{Results and discussion}` — TODO
+- `\section{Conclusion}` — TODO
+- `\section{Methods}` — TODO
 
-All sample/example content (tables, figures, equations, theorems, algorithms, etc.) should be removed and replaced with actual paper content.
+Plus: `\abstract`, `\keywords` (done), backmatter declarations (scaffold), `\bibliography{sn-bibliography}` (populated with 20 entries).
+
+The original `sn-article.tex` template is kept for reference only.
 
 ---
 
@@ -416,12 +452,12 @@ All sample/example content (tables, figures, equations, theorems, algorithms, et
 
 | # | Task | Status | Priority | Notes |
 |---|------|--------|----------|-------|
-| 1 | Write Title | DONE | High | Set in `paper_draft.tex`: "Toxicity Classification for Small Molecules and Peptides" (official task title) |
+| 1 | Write Title | DONE | High | "Toxicity Classification for Small Molecules and Peptides" |
 | 2 | Write Abstract (~200 words) | TODO | High | Problem → approach → key findings |
-| 3 | Write Introduction | DONE | High | Written in `paper_draft.tex` — 3 concise paragraphs (~300 words), solo author voice |
-| 4 | Write Results | TODO | High | 3 tables (dataset + 2 xlsx), 4 figures (PNGs from `paper/images/`) |
-| 5 | Write Discussion | TODO | Medium | Interpretation, direction effects, capacity effects, comparison with SVM, answer RQ1–RQ6 |
-| 6 | Write Methods | TODO | High | Datasets, preprocessing, architecture, TL strategies, SVM baseline, CV, metrics |
+| 3 | Write Introduction | DONE | High | 3 concise paragraphs (~300 words), solo author voice |
+| 4 | Write Results and discussion | TODO | High | Combined section (Njirjak et al. 2024 style): 3 tables, 4 figures, interpretation, RQ1–RQ6 |
+| 5 | Write Conclusion | TODO | Medium | 1 paragraph: key takeaways, implications, future work |
+| 6 | Write Methods | TODO | High | Datasets, architecture, TL strategies, SVM baseline, CV, metrics, stats |
 | 7 | Populate `sn-bibliography.bib` | DONE | High | 20 real BibTeX entries — 5 cited in Intro + 15 for future sections |
 
 ### 8.2 Figures — FINAL LIST (only PNGs from `paper/images/`)
@@ -579,19 +615,21 @@ The `sn-bibliography.bib` has been populated with **20 real BibTeX entries** (sa
 When asked to help write a specific paper section:
 
 1. **Read this file first** for context on what exists and conventions
-2. **Check `paper/images/eval-book-*.xlsx`** (or root-level copies) for actual numerical results
-3. **Read `models_architecture/` docs** for exact technical details — especially `project_process_documentation.md` (761 lines of detailed pipeline) and the individual `method*.md` files for layer-level specifics
-4. **Use `introduction/` drafts** as detailed process knowledge (not as text to copy — they're too verbose for a paper)
-5. **Consult `paper/questions/`** to ensure the section answers one or more of the 6 formal research questions (RQ1–RQ6)
-6. **Follow the ToxinPred paper style** (`paper/comparison/toxinPred-v1.pdf`) — scientific, concise, every sentence carries weight
-7. **Output LaTeX** that can be directly pasted into `sn-article.tex` on Overleaf
+2. **Consult `paper/example-works/`** — read the corresponding section in Njirjak et al. (2024) and Leyva et al. (2025) to match tone, structure, and depth. **This is the #1 priority before writing anything.**
+3. **Check `paper/images/eval-book-*.xlsx`** (or root-level copies) for actual numerical results
+4. **Read `models_architecture/` docs** for exact technical details — especially `project_process_documentation.md` (761 lines of detailed pipeline) and the individual `method*.md` files for layer-level specifics
+5. **Use `introduction/` drafts** as detailed process knowledge (not as text to copy — they're too verbose for a paper)
+6. **Consult `paper/questions/`** to ensure the section answers one or more of the 6 formal research questions (RQ1–RQ6)
+7. **Output LaTeX** that can be directly pasted into `paper_draft.tex` on Overleaf
 8. **Use `\cite{key}` format** for references, with keys from `sn-bibliography.bib`
 9. **Tables in LaTeX** should use `booktabs` package (`\toprule`, `\midrule`, `\botrule`)
-10. **Figures** from `paper/images/` should be referenced as `\includegraphics` — convert PNG to EPS/PDF for Overleaf if needed
+10. **Figures** from `paper/images/` should be referenced as `\includegraphics` — PNG format is fine for Overleaf
 11. **Always specify transfer direction** when discussing results (SMT→Peptide or Peptide→SMT)
 12. **Report metrics as mean ± std** (3 decimal places for mean, 2-3 for std)
 13. **Use 72 for the shared atom vocabulary size** in Methods — any doc stating 27 is a typo (see Section 6.4)
 14. **Call it "pretrained source model"**, never "overtrained model" in the paper text
+15. **Keep to 4 sections only**: Introduction, Results and discussion, Conclusion, Methods — no extra sections
+16. **Use descriptive subheadings** (not numbered subsections) within sections when needed
 
 ---
 

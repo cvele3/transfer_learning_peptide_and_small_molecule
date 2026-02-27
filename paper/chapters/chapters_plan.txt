@@ -1,217 +1,147 @@
 ================================================================================
-  CHAPTER PLAN — Nature Machine Intelligence Article Format
-  Paper: Cross-Domain Transfer Learning for Molecular Toxicity Prediction
-         Using Graph Neural Networks
+  CHAPTER PLAN — Nature Machine Intelligence Article Format (Simplified)
+  Paper: Toxicity Classification for Small Molecules and Peptides
   Author: Jakov Cvetko, Faculty of Engineering (RITEH), University of Rijeka
 ================================================================================
 
 TARGET JOURNAL: Nature Machine Intelligence (Springer Nature, Nature Portfolio)
 REFERENCE STYLE: Nature Portfolio Numbered (sn-nature.bst)
 TEMPLATE: sn-jnl.cls (Springer Nature Journal Article Class)
+PAGE LIMIT: 8 pages maximum
 
-Note: Nature Machine Intelligence follows the standard Nature Portfolio
-article structure: Introduction → Results → Discussion → Methods (at end).
-This differs from traditional IMRaD where Methods precedes Results.
-The reader sees the findings first, then the technical detail.
+STRUCTURE MODELLED AFTER:
+  Njirjak et al. (2024) Nat. Mach. Intell. 6, 1487–1500
+    → Introduction → Results and discussion → Conclusion → Methods
+  Leyva et al. (2025) Nat. Mach. Intell. 7, 1685–1697
+    → Introduction → Results → Discussion → Methods
 
-Comparison with ToxinPred reference paper (Gupta et al., 2013, PLoS ONE):
-  ToxinPred used: Abstract → Introduction → Materials and Methods → Results
-                  and Discussion → Conclusion → Supporting Information
-  This paper uses: the Nature format below, which front-loads Results and
-                   places Methods at the end for cleaner narrative flow.
+  Both papers live in paper/example-works/ — consult before writing.
 
 ================================================================================
-  SECTION-BY-SECTION PLAN
+  SECTION-BY-SECTION PLAN (4 sections only)
 ================================================================================
 
-1. TITLE
-   Working: "Cross-Domain Transfer Learning for Molecular Toxicity
-            Prediction Using Graph Neural Networks"
-   Style: Descriptive, contains key terms for indexing.
-   Length: Preferably under 20 words.
+1. ABSTRACT (~150-200 words, unstructured, no citations)
+   Cover: problem, approach, key result, significance.
 
 --------
 
-2. ABSTRACT (~150-200 words, unstructured, no subheadings)
-   Must cover in condensed form:
-   - Problem: Toxicity prediction across molecular domains
-   - Approach: DeepGraphCNN + 4 transfer strategies, bidirectional
-   - Key result: Whether transfer helps, which strategy/direction is best
-   - Significance: Practical implications for molecular screening
-   No citations, no equations, no abbreviations on first use.
+2. INTRODUCTION (~0.75 pages, 3 concise paragraphs)
+   P1 — Molecular toxicity prediction, computational approaches,
+         GNNs as natural molecular representation, DeepGraphCNN.
+   P2 — Transfer learning opportunity: shared chemical basis,
+         gap in cross-domain TL for toxicity.
+   P3 — What this study does: bidirectional TL, 4 strategies,
+         multiple model capacities, rigorous CV, SVM baseline.
+   Voice: Passive / "this study" (solo author, no "we").
+   Status: DONE
 
 --------
 
-3. INTRODUCTION (no subheadings, ~600-800 words, 4-6 paragraphs)
-   Flow:
-   P1 — Broad context: molecular toxicity prediction, why it matters,
-         computational approaches gaining traction
-   P2 — Graph neural networks for molecular data: natural representation,
-         DeepGraphCNN, advantages over descriptor-based methods
-   P3 — Transfer learning opportunity: shared chemical basis between
-         molecular families, gap in cross-domain TL for toxicity
-   P4 — What this study does: bidirectional TL, 4 strategies, multiple
-         model capacities, rigorous CV and statistical testing, SVM baseline
-   P5 — Explicit statement of contributions (numbered list if needed)
+3. RESULTS AND DISCUSSION (~3-3.5 pages, combined section)
+   Weave findings and interpretation together. Use descriptive
+   subheadings (not numbered) to organize content:
 
-   Voice: Passive / "this study" / "the present work" (solo author, no "we")
-   Tone: Concise, every sentence informative, following ToxinPred style
+   Dataset characteristics
+     - Table 1: summary statistics for both datasets
+     - Shared 72-element atom vocabulary enabling cross-domain transfer
 
---------
+   Transfer learning performance
+     - Table 2: peptide target results (SMT→Peptide)
+     - Table 3: SMT target results (Peptide→SMT)
+     - Compare methods vs baseline, discuss which strategies work
+     - Discuss directional asymmetry (RQ4)
+     - Figure 3: radar chart peptide, Figure 4: radar chart SMT
 
-4. RESULTS (with descriptive subheadings, main body of the paper)
+   Effect of model capacity
+     - How Standard, Large Layers, Inflated, Extra Inflated compare
+     - Whether larger models benefit more from transfer
 
-   4.1 Dataset Characteristics
-       - Summary statistics for both datasets (Table 1)
-       - Class distributions, molecular size differences
-       - Shared atom vocabulary enabling cross-domain transfer
+   Statistical analysis
+     - Friedman test results, Nemenyi post-hoc comparisons
+     - Which differences are significant (RQ3)
 
-   4.2 Baseline Performance
-       - From-scratch model results for both domains
-       - Across model capacity configurations
-       - Establishes the reference point for TL comparison
+   Comparison with DPC+SVM baseline
+     - GNN baseline vs SVM vs best TL method on peptide domain (RQ6)
 
-   4.3 Transfer Learning Performance: SMT → Peptide
-       - All 4 methods vs baseline across model sizes
-       - Table with 6 metrics (ROC-AUC, GM, Precision, Recall, F1, MCC)
-       - Which method(s) improve over baseline, by how much
-
-   4.4 Transfer Learning Performance: Peptide → SMT
-       - Same structure as 4.3, opposite direction
-       - Direct comparison reveals directional asymmetry
-
-   4.5 Effect of Model Capacity on Transfer
-       - How Standard, Large Layers, Inflated, Extra Inflated compare
-       - Whether larger models benefit more (or less) from transfer
-       - Radar chart or capacity comparison figure
-
-   4.6 Statistical Analysis
-       - Friedman test results per direction
-       - Nemenyi post-hoc pairwise comparisons
-       - Which differences are statistically significant
-
-   4.7 Comparison with Classical Baseline (DPC+SVM)
-       - SVM results on peptide domain using aligned CV splits
-       - GNN baseline vs SVM vs best TL method
-       - Contextualizes GNN approach against established methodology
+   Key insights
+     - Answer RQ1-RQ6 naturally within the narrative
+     - Limitations (brief)
 
 --------
 
-5. DISCUSSION (~500-700 words)
-   Key threads to address:
-   - Answer to each research question (RQ1-RQ6) explicitly or implicitly
-   - Why certain transfer strategies work better
-   - Why direction matters (or doesn't)
-   - Role of model capacity in transfer effectiveness
-   - Limitations: dataset-specific, architectural choices, scope
-   - Comparison with ToxinPred / existing peptide toxicity methods
-   - Practical implications for molecular screening workflows
-   - Future work: other architectures, more domains, attention mechanisms
+4. CONCLUSION (~0.25-0.5 pages, 1 paragraph)
+   - Key takeaways
+   - Practical implications for molecular screening
+   - Future directions (other architectures, more domains)
 
 --------
 
-6. METHODS (detailed, placed at end per Nature format)
+5. METHODS (~2-2.5 pages, descriptive subheadings)
 
-   6.1 Datasets
-       - Sources, sizes, class distributions
-       - SMILES representation
+   Datasets
+     - Sources, sizes, class distributions, SMILES representation
 
-   6.2 Molecular Graph Construction
-       - SMILES → RDKit Mol → graph
-       - Node features: 72-element one-hot + atomic descriptors
-       - Edge features: bond type + structural descriptors
-       - StellarGraph objects
+   Molecular graph construction
+     - SMILES → RDKit → graph; 72-element one-hot node features
 
-   6.3 DeepGraphCNN Architecture
-       - 4 GraphConvolution layers (tanh, no bias)
-       - SortPooling (k=25)
-       - Conv1D readout (16 → 32 filters)
-       - Dense(128, ReLU) → Dropout(0.2) → Dense(1, Sigmoid)
-       - Model capacity configurations table
+   DeepGraphCNN architecture
+     - Layer stack, model capacity configurations
+     - Table or inline: 4 model sizes
 
-   6.4 Source Model Pretraining
-       - Trained on 100% source data (90/10 train/val)
-       - Adam, lr=1e-4, early stopping patience=7
-       - Purpose: maximize knowledge for transfer
+   Source model pretraining
+     - 100% source data, 90/10 split, early stopping patience=7
 
-   6.5 Transfer Learning Strategies
-       - Method 1: Freeze GNN (lr=1e-4)
-       - Method 2: Freeze Readout (lr=1e-5)
-       - Method 3: Freeze All + New Output (lr=1e-4)
-       - Method 4: Gradual Unfreezing (3 phases, lr 1e-3→1e-4→1e-5)
-       - Rationale for each
+   Transfer learning strategies
+     - M1: Freeze GNN; M2: Freeze Readout; M3: Freeze All + new output;
+       M4: Gradual Unfreezing (3 phases)
+     - Rationale for each, brief
 
-   6.6 DPC+SVM Reference Model
-       - 400-dim dipeptide composition features
-       - RBF SVM (C=5, gamma=0.001, balanced weights)
-       - Same CV splits as GNN models
+   DPC+SVM reference model
+     - 400-dim DPC, RBF SVM, aligned CV splits
 
-   6.7 Cross-Validation Protocol
-       - Stratified 10-fold CV
-       - Shared fold definitions across all methods
-       - Within-fold: 64% train, 16% val, 20% test
-
-   6.8 Evaluation Metrics
-       - ROC-AUC, G-Mean, Precision, Recall, F1, MCC
-       - Why each was chosen
-
-   6.9 Statistical Testing
-       - Friedman test for overall differences
-       - Nemenyi post-hoc for pairwise comparisons
+   Cross-validation and evaluation
+     - Stratified 10-fold CV, shared splits
+     - Metrics: ROC-AUC, G-Mean, Precision, Recall, F1, MCC
+     - Statistical testing: Friedman + Nemenyi
 
 --------
 
-7. DATA AVAILABILITY
-   Statement about dataset sources and availability.
-
-8. CODE AVAILABILITY
-   Statement about code/repository.
-
-9. ACKNOWLEDGEMENTS (if applicable)
-
-10. DECLARATIONS
-    - Competing interests
-    - Author contributions (solo)
-
-11. REFERENCES
-    Using sn-bibliography.bib, Nature Portfolio numbered style.
-
---------
-
-12. EXTENDED DATA / SUPPLEMENTARY (optional)
-    - Additional tables (all model sizes × all metrics)
-    - Additional figures (confusion matrices, calibration curves, violin plots)
-    - Full Nemenyi pairwise matrices
+6. BACKMATTER
+   - Acknowledgements (if applicable)
+   - Declarations (funding, competing interests, data/code availability)
+   - References (sn-bibliography.bib, Nature numbered style)
 
 ================================================================================
   FIGURES — FINAL (4 figures, all PNGs from paper/images/)
 ================================================================================
 
-  Fig. 1 — Project pipeline overview         (paper/images/project-diagram.png)
-  Fig. 2 — Model architectures side-by-side  (paper/images/side-by-side-models-boxes.png)
-  Fig. 3 — Radar chart, peptide target       (paper/images/radar_plots_peptide_median.png)
-  Fig. 4 — Radar chart, SMT target           (paper/images/radar_plots_smt_median.png)
-
-  No additional figures to collect or generate. All figures come from paper/images/.
+  Fig. 1 — Project pipeline overview         (project-diagram.png)
+  Fig. 2 — Model architectures side-by-side  (side-by-side-models-boxes.png)
+  Fig. 3 — Radar chart, peptide target       (radar_plots_peptide_median.png)
+  Fig. 4 — Radar chart, SMT target           (radar_plots_smt_median.png)
 
 ================================================================================
   TABLES — FINAL (exactly 3 tables)
 ================================================================================
 
-  Table 1 — Dataset characteristics          (paper/images/dataset_analysis_results.md)
-  Table 2 — Peptide target results           (paper/images/eval-book-peptide-results.xlsx)
-  Table 3 — SMT target results               (paper/images/eval-book-smt-results.xlsx)
+  Table 1 — Dataset characteristics          (dataset_analysis_results.md)
+  Table 2 — Peptide target results           (eval-book-peptide-results.xlsx)
+  Table 3 — SMT target results               (eval-book-smt-results.xlsx)
 
 ================================================================================
   KEY WRITING RULES
 ================================================================================
 
   - Solo author: NO "we". Use passive voice or "this study"/"the present work"
-  - Concise: every sentence must carry information (ToxinPred reference)
-  - Quantitative: always back claims with metric values (mean ± std)
+  - Concise: every sentence must carry information
+  - Quantitative: always back claims with metric values (mean +/- std)
   - Consistent terminology: see PAPER_GUIDE.md Section 6.3
   - Shared vocabulary = 72 elements (any doc saying 27 is a typo)
   - "Pretrained source model" not "overtrained model"
   - Always specify transfer direction when reporting results
+  - Only 4 \section{} commands in the body — no more
+  - Descriptive subheadings within sections, never numbered subsections
+  - Consult paper/example-works/ before writing ANY section
 
 ================================================================================

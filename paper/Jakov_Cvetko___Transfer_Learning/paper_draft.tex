@@ -54,114 +54,60 @@ Transfer learning---reusing knowledge from a data-rich source domain to improve 
 The present study systematically evaluates cross-domain transfer learning for molecular toxicity prediction using DeepGraphCNN. Four strategies---freezing the graph encoder, freezing the readout head, freezing all layers with a new output, and gradual unfreezing with discriminative learning rates---are applied bidirectionally between small molecule and peptide toxicity domains across four model capacity configurations. All methods, including a from-scratch baseline and a DPC-SVM model replicating ToxinPred \cite{gupta2013toxinpred}, are compared under identical stratified ten-fold cross-validation splits using six metrics (ROC-AUC, G-Mean, Precision, Recall, F1, MCC) and Friedman/Nemenyi statistical tests \cite{demsar2006statistical}. A shared 72-element atom vocabulary ensures cross-domain weight compatibility. The results provide empirical guidance on when and how cross-domain transfer offers practical benefits over training from scratch.
 
 %%==================================%%
-%% RESULTS
+%% RESULTS AND DISCUSSION (combined, following Njirjak et al. 2024)
 %%==================================%%
 
-\section{Results}\label{sec:results}
+\section{Results and discussion}\label{sec:results}
 
-% TODO: Populate with actual experimental results.
+% TODO: Populate with actual experimental results and interpretation.
+% Structure: use descriptive subheadings (no \subsection), weave findings
+% and interpretation together. Consult paper/example-works/ for style.
 %
 % TABLES (exactly 3):
-%   Table 1 — Dataset characteristics (from paper/images/dataset_analysis_results.md)
-%   Table 2 — Peptide target results (from paper/images/eval-book-peptide-results.xlsx)
-%   Table 3 — SMT target results (from paper/images/eval-book-smt-results.xlsx)
+%   Table 1 — Dataset characteristics (paper/images/dataset_analysis_results.md)
+%   Table 2 — Peptide target results (paper/images/eval-book-peptide-results.xlsx)
+%   Table 3 — SMT target results (paper/images/eval-book-smt-results.xlsx)
 %
 % FIGURES (PNGs from paper/images/ only):
 %   Fig. 1 — Pipeline overview (project-diagram.png)
 %   Fig. 2 — Model architectures side-by-side (side-by-side-models-boxes.png)
 %   Fig. 3 — Radar chart, peptide target (radar_plots_peptide_median.png)
 %   Fig. 4 — Radar chart, SMT target (radar_plots_smt_median.png)
-
-\subsection{Dataset characteristics}\label{subsec:datasets}
-
-% TODO: Table 1 — Dataset summary statistics
-% Data source: paper/images/dataset_analysis_results.md
-
-\subsection{Baseline performance}\label{subsec:baseline}
-
-% TODO: From-scratch model performance across model sizes, both domains
-
-\subsection{Transfer learning: small molecule toxicity to peptide direction}\label{subsec:smt_to_peptide}
-
-% TODO: Table 2 — All methods × all metrics for SMT→Peptide
-% Data source: paper/images/eval-book-peptide-results.xlsx
-
-\subsection{Transfer learning: peptide to small molecule toxicity direction}\label{subsec:peptide_to_smt}
-
-% TODO: Table 3 — All methods × all metrics for Peptide→SMT
-% Data source: paper/images/eval-book-smt-results.xlsx
-
-\subsection{Effect of model capacity on transfer}\label{subsec:capacity}
-
-% TODO: Compare Standard, Large Layers, Inflated, Extra Inflated
-% Figures: radar_plots_peptide_median.png, radar_plots_smt_median.png
-
-\subsection{Statistical analysis}\label{subsec:statistics}
-
-% TODO: Friedman test results, Nemenyi post-hoc pairwise comparisons
-
-\subsection{Comparison with classical machine learning baseline}\label{subsec:svm_comparison}
-
-% TODO: DPC+SVM results vs GNN baseline vs best TL method on peptide domain
-% Data source: svm/DPC_SVM_results*.xlsx
+%
+% Suggested flow (descriptive subheadings, not numbered):
+%   Dataset characteristics → Table 1
+%   Transfer learning performance → Tables 2 & 3, discuss both directions
+%   Effect of model capacity → Figs. 3 & 4
+%   Statistical analysis → Friedman/Nemenyi results
+%   Comparison with DPC+SVM baseline → RQ6
+%   Answer RQ1-RQ6 naturally within narrative
 
 %%==================================%%
-%% DISCUSSION
+%% CONCLUSION
 %%==================================%%
 
-\section{Discussion}\label{sec:discussion}
+\section{Conclusion}\label{sec:conclusion}
 
-% TODO: Interpret results in context of research questions RQ1-RQ6.
-% Address: transfer direction effects, strategy behaviour, capacity influence,
-% comparison with SVM/ToxinPred, limitations, future work.
+% TODO: 1 concise paragraph (~0.25-0.5 pages).
+% Key takeaways, practical implications, future directions.
 
 %%==================================%%
-%% METHODS
+%% METHODS (at end, per Nature format)
 %%==================================%%
 
 \section{Methods}\label{sec:methods}
 
-% TODO: Detailed methodology, placed at end per Nature format.
-
-\subsection{Datasets}\label{subsec:methods_datasets}
-
-% TODO: Dataset sources, sizes, class distributions, SMILES representation
-
-\subsection{Molecular graph construction}\label{subsec:graph_construction}
-
-% TODO: SMILES → RDKit → graph; node features (72-element one-hot + descriptors);
-% edge features; StellarGraph objects
-
-\subsection{DeepGraphCNN architecture}\label{subsec:architecture}
-
-% TODO: Layer-by-layer description, model capacity configurations table
-% Reference: models_architecture/overtrained_model.md
-
-\subsection{Source model pretraining}\label{subsec:pretraining}
-
-% TODO: Training on 100% source data, 90/10 split, early stopping
-
-\subsection{Transfer learning strategies}\label{subsec:transfer_strategies}
-
-% TODO: Methods 1-4 with frozen/trainable layer specifications
-% Reference: models_architecture/method1-4.md
-
-\subsection{DPC-SVM reference model}\label{subsec:svm_methods}
-
-% TODO: 400-dim DPC features, RBF SVM, aligned CV splits
-% Reference: svm/DPC_SVM_dokumentacija.md
-
-\subsection{Cross-validation protocol}\label{subsec:cv_protocol}
-
-% TODO: Stratified 10-fold, shared splits, within-fold partitioning
-
-\subsection{Evaluation metrics}\label{subsec:metrics}
-
-% TODO: ROC-AUC, G-Mean, Precision, Recall, F1, MCC — definitions and rationale
-
-\subsection{Statistical testing}\label{subsec:statistical_testing}
-
-% TODO: Friedman test, Nemenyi post-hoc, why non-parametric
+% TODO: Detailed methodology. Use descriptive subheadings (not numbered).
+% Consult paper/example-works/ for appropriate level of detail.
+%
+% Suggested flow (descriptive subheadings):
+%   Datasets — sources, sizes, class distributions, SMILES representation
+%   Molecular graph construction — SMILES → RDKit → graph; 72-element one-hot
+%   DeepGraphCNN architecture — layer stack, 4 model capacity configs
+%   Source model pretraining — 100% source data, 90/10 split, patience=7
+%   Transfer learning strategies — M1-M4 with frozen/trainable specs
+%   DPC-SVM reference model — 400-dim DPC, RBF SVM, aligned CV splits
+%   Cross-validation and evaluation — 10-fold CV, 6 metrics, Friedman/Nemenyi
 
 %%==================================%%
 %% BACKMATTER
