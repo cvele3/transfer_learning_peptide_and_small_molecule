@@ -28,28 +28,25 @@
 }
 
 %% [2] Neural Message Passing — foundational GNN framework for molecules
-@inproceedings{gilmer2017mpnn,
+@article{gilmer2017mpnn,
   author    = {Gilmer, Justin and Schoenholz, Samuel S. and Riley, Patrick F.
                and Vinyals, Oriol and Dahl, George E.},
   title     = {Neural Message Passing for Quantum Chemistry},
-  booktitle = {Proceedings of the 34th International Conference on Machine
+  journal   = {Proceedings of the 34th International Conference on Machine
                Learning (ICML)},
-  series    = {Proceedings of Machine Learning Research},
   volume    = {70},
   pages     = {1263--1272},
-  publisher = {PMLR},
   year      = {2017}
 }
 
 %% [3] DGCNN — the architecture used in this study
-@inproceedings{zhang2018deepgraphcnn,
+@article{zhang2018deepgraphcnn,
   author    = {Zhang, Muhan and Cui, Zhicheng and Neumann, Marion and
                Chen, Yixin},
   title     = {An End-to-End Deep Learning Architecture for Graph
                Classification},
-  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  journal   = {Proceedings of the AAAI Conference on Artificial Intelligence},
   volume    = {32},
-  number    = {1},
   pages     = {4438--4445},
   year      = {2018},
   doi       = {10.1609/aaai.v32i1.11782}
@@ -108,22 +105,22 @@
 %% --- Graph neural networks ---
 
 %% Semi-supervised GCN — foundational GNN reference
-@inproceedings{kipf2017gcn,
+@article{kipf2017gcn,
   author    = {Kipf, Thomas N. and Welling, Max},
   title     = {Semi-Supervised Classification with Graph Convolutional
                Networks},
-  booktitle = {Proceedings of the 5th International Conference on Learning
+  journal   = {Proceedings of the 5th International Conference on Learning
                Representations (ICLR)},
   year      = {2017}
 }
 
 %% Strategies for pre-training GNNs — transfer learning on graphs
-@inproceedings{hu2020pretraining,
+@article{hu2020pretraining,
   author    = {Hu, Weihua and Liu, Bowen and Gomes, Joseph and
                Zitnik, Marinka and Liang, Percy and Pande, Vijay and
                Leskovec, Jure},
   title     = {Strategies for Pre-Training Graph Neural Networks},
-  booktitle = {Proceedings of the 8th International Conference on Learning
+  journal   = {Proceedings of the 8th International Conference on Learning
                Representations (ICLR)},
   year      = {2020}
 }
@@ -156,11 +153,12 @@
 %% --- Transfer learning ---
 
 %% How transferable are features — layer-wise transferability analysis
-@inproceedings{yosinski2014transferable,
+@article{yosinski2014transferable,
   author    = {Yosinski, Jason and Clune, Jeff and Bengio, Yoshua and
                Lipson, Hod},
   title     = {How Transferable Are Features in Deep Neural Networks?},
-  booktitle = {Advances in Neural Information Processing Systems 27 (NeurIPS)},
+  journal   = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {27},
   pages     = {3320--3328},
   year      = {2014}
 }
@@ -168,23 +166,23 @@
 %% --- Deep learning tools ---
 
 %% TensorFlow
-@inproceedings{tensorflow,
+@article{tensorflow,
   author    = {Abadi, Mart\'{\i}n and Barham, Paul and Chen, Jianmin and
                Chen, Zhifeng and Davis, Andy and Dean, Jeffrey and
                Devin, Matthieu and Ghemawat, Sanjay and Irving, Geoffrey
                and Isard, Michael and others},
   title     = {{TensorFlow}: A System for Large-Scale Machine Learning},
-  booktitle = {Proceedings of the 12th USENIX Symposium on Operating Systems
+  journal   = {Proceedings of the 12th USENIX Symposium on Operating Systems
                Design and Implementation (OSDI)},
   pages     = {265--283},
   year      = {2016}
 }
 
 %% Adam optimizer
-@inproceedings{kingma2015adam,
+@article{kingma2015adam,
   author    = {Kingma, Diederik P. and Ba, Jimmy},
   title     = {Adam: A Method for Stochastic Optimization},
-  booktitle = {Proceedings of the 3rd International Conference on Learning
+  journal   = {Proceedings of the 3rd International Conference on Learning
                Representations (ICLR)},
   year      = {2015}
 }
@@ -260,16 +258,13 @@
 }
 
 %% SVMlight — used in original ToxinPred paper
-@incollection{joachims1999svm,
+@article{joachims1999svm,
   author    = {Joachims, Thorsten},
   title     = {Making Large-Scale {SVM} Learning Practical},
-  editor    = {Sch{\"o}lkopf, Bernhard and Burges, Christopher J. C. and
-               Smola, Alexander J.},
-  booktitle = {Advances in Kernel Methods --- Support Vector Learning},
+  journal   = {Advances in Kernel Methods --- Support Vector Learning},
   pages     = {169--184},
-  publisher = {MIT Press},
-  address   = {Cambridge, MA},
-  year      = {1999}
+  year      = {1999},
+  note      = {MIT Press, Cambridge, MA}
 }
 
 %% --- Toxicity prediction / drug discovery context ---
