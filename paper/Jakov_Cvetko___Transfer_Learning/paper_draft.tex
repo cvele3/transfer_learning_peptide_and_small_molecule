@@ -1,0 +1,193 @@
+%% paper_draft.tex — Working draft for Nature Machine Intelligence submission
+%% Author: Jakov Cvetko
+%% Template: Springer Nature Journal Article Class (sn-jnl.cls)
+%% Created: 2026-02-27
+%%
+%% This file contains the actual paper content. Compile with pdflatex.
+%% Keep sn-jnl.cls, sn-nature.bst, and sn-bibliography.bib in the same directory.
+
+\documentclass[pdflatex,sn-nature]{sn-jnl}% Nature Portfolio reference style
+
+%%%% Standard Packages
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{textcomp}
+\usepackage[title]{appendix}
+
+\raggedbottom
+
+\begin{document}
+
+\title[Toxicity Classification for Small Molecules and Peptides]{Toxicity Classification for Small Molecules and Peptides}
+
+\author*[1]{\fnm{Jakov} \sur{Cvetko}}\email{cvetkojakov@gmail.com}
+
+\affil*[1]{\orgdiv{Faculty of Engineering}, \orgname{University of Rijeka}, \orgaddress{\city{Rijeka}, \country{Croatia}}}
+
+%%==================================%%
+%% Abstract
+%%==================================%%
+
+\abstract{
+% TODO: Write after Results and Discussion are complete.
+% ~150-200 words, unstructured, no citations.
+% Cover: problem, approach, key findings, significance.
+}
+
+\keywords{transfer learning, graph neural networks, molecular toxicity, DeepGraphCNN, cross-domain classification, peptide toxicity}
+
+\maketitle
+
+%%==================================%%
+%% INTRODUCTION
+%%==================================%%
+
+\section{Introduction}\label{sec:introduction}
+
+Computational prediction of molecular toxicity is essential for early-stage drug screening, offering a scalable alternative to costly and ethically constrained experimental assays. Both small chemical compounds and therapeutic peptides are active targets of drug development, yet labelled toxicity data remains scarce in specialised domains. Classical approaches such as dipeptide composition (DPC) based support vector machines have achieved strong within-domain performance---ToxinPred, for instance, reached 94.50\% accuracy on peptide toxicity classification \cite{gupta2013toxinpred}---but rely on hand-crafted descriptors that discard molecular topology. Graph neural networks (GNNs) address this limitation by operating directly on molecular graphs, where atoms serve as nodes and bonds as edges \cite{gilmer2017mpnn}. The Deep Graph Convolutional Neural Network (DeepGraphCNN) \cite{zhang2018deepgraphcnn} produces fixed-size graph representations through graph convolution and sort pooling, making it well suited for binary toxicity classification.
+
+Transfer learning---reusing knowledge from a data-rich source domain to improve performance on a related target task \cite{pan2010transfer}---has transformed other areas of machine learning, yet cross-domain transfer between chemically distinct molecular families remains largely unexplored. Peptides and small molecules share the same fundamental atomic building blocks, suggesting that toxicity-relevant substructural patterns learned in one domain could carry predictive value in the other. Whether this shared chemical foundation translates into measurable classification gains, and which layer-freezing strategy best preserves transferred knowledge, are open questions.
+
+The present study systematically evaluates cross-domain transfer learning for molecular toxicity prediction using DeepGraphCNN. Four strategies---freezing the graph encoder, freezing the readout head, freezing all layers with a new output, and gradual unfreezing with discriminative learning rates---are applied bidirectionally between small molecule and peptide toxicity domains across four model capacity configurations. All methods, including a from-scratch baseline and a DPC-SVM model replicating ToxinPred \cite{gupta2013toxinpred}, are compared under identical stratified ten-fold cross-validation splits using six metrics (ROC-AUC, G-Mean, Precision, Recall, F1, MCC) and Friedman/Nemenyi statistical tests \cite{demsar2006statistical}. A shared 72-element atom vocabulary ensures cross-domain weight compatibility. The results provide empirical guidance on when and how cross-domain transfer offers practical benefits over training from scratch.
+
+%%==================================%%
+%% RESULTS
+%%==================================%%
+
+\section{Results}\label{sec:results}
+
+% TODO: Populate with actual experimental results.
+%
+% TABLES (exactly 3):
+%   Table 1 — Dataset characteristics (from paper/images/dataset_analysis_results.md)
+%   Table 2 — Peptide target results (from paper/images/eval-book-peptide-results.xlsx)
+%   Table 3 — SMT target results (from paper/images/eval-book-smt-results.xlsx)
+%
+% FIGURES (PNGs from paper/images/ only):
+%   Fig. 1 — Pipeline overview (project-diagram.png)
+%   Fig. 2 — Model architectures side-by-side (side-by-side-models-boxes.png)
+%   Fig. 3 — Radar chart, peptide target (radar_plots_peptide_median.png)
+%   Fig. 4 — Radar chart, SMT target (radar_plots_smt_median.png)
+
+\subsection{Dataset characteristics}\label{subsec:datasets}
+
+% TODO: Table 1 — Dataset summary statistics
+% Data source: paper/images/dataset_analysis_results.md
+
+\subsection{Baseline performance}\label{subsec:baseline}
+
+% TODO: From-scratch model performance across model sizes, both domains
+
+\subsection{Transfer learning: small molecule toxicity to peptide direction}\label{subsec:smt_to_peptide}
+
+% TODO: Table 2 — All methods × all metrics for SMT→Peptide
+% Data source: paper/images/eval-book-peptide-results.xlsx
+
+\subsection{Transfer learning: peptide to small molecule toxicity direction}\label{subsec:peptide_to_smt}
+
+% TODO: Table 3 — All methods × all metrics for Peptide→SMT
+% Data source: paper/images/eval-book-smt-results.xlsx
+
+\subsection{Effect of model capacity on transfer}\label{subsec:capacity}
+
+% TODO: Compare Standard, Large Layers, Inflated, Extra Inflated
+% Figures: radar_plots_peptide_median.png, radar_plots_smt_median.png
+
+\subsection{Statistical analysis}\label{subsec:statistics}
+
+% TODO: Friedman test results, Nemenyi post-hoc pairwise comparisons
+
+\subsection{Comparison with classical machine learning baseline}\label{subsec:svm_comparison}
+
+% TODO: DPC+SVM results vs GNN baseline vs best TL method on peptide domain
+% Data source: svm/DPC_SVM_results*.xlsx
+
+%%==================================%%
+%% DISCUSSION
+%%==================================%%
+
+\section{Discussion}\label{sec:discussion}
+
+% TODO: Interpret results in context of research questions RQ1-RQ6.
+% Address: transfer direction effects, strategy behaviour, capacity influence,
+% comparison with SVM/ToxinPred, limitations, future work.
+
+%%==================================%%
+%% METHODS
+%%==================================%%
+
+\section{Methods}\label{sec:methods}
+
+% TODO: Detailed methodology, placed at end per Nature format.
+
+\subsection{Datasets}\label{subsec:methods_datasets}
+
+% TODO: Dataset sources, sizes, class distributions, SMILES representation
+
+\subsection{Molecular graph construction}\label{subsec:graph_construction}
+
+% TODO: SMILES → RDKit → graph; node features (72-element one-hot + descriptors);
+% edge features; StellarGraph objects
+
+\subsection{DeepGraphCNN architecture}\label{subsec:architecture}
+
+% TODO: Layer-by-layer description, model capacity configurations table
+% Reference: models_architecture/overtrained_model.md
+
+\subsection{Source model pretraining}\label{subsec:pretraining}
+
+% TODO: Training on 100% source data, 90/10 split, early stopping
+
+\subsection{Transfer learning strategies}\label{subsec:transfer_strategies}
+
+% TODO: Methods 1-4 with frozen/trainable layer specifications
+% Reference: models_architecture/method1-4.md
+
+\subsection{DPC-SVM reference model}\label{subsec:svm_methods}
+
+% TODO: 400-dim DPC features, RBF SVM, aligned CV splits
+% Reference: svm/DPC_SVM_dokumentacija.md
+
+\subsection{Cross-validation protocol}\label{subsec:cv_protocol}
+
+% TODO: Stratified 10-fold, shared splits, within-fold partitioning
+
+\subsection{Evaluation metrics}\label{subsec:metrics}
+
+% TODO: ROC-AUC, G-Mean, Precision, Recall, F1, MCC — definitions and rationale
+
+\subsection{Statistical testing}\label{subsec:statistical_testing}
+
+% TODO: Friedman test, Nemenyi post-hoc, why non-parametric
+
+%%==================================%%
+%% BACKMATTER
+%%==================================%%
+
+\backmatter
+
+\bmhead{Acknowledgements}
+
+% TODO: Add acknowledgements if applicable.
+
+\section*{Declarations}
+
+\begin{itemize}
+\item \textbf{Funding:} Not applicable.
+\item \textbf{Competing interests:} The author declares no competing interests.
+\item \textbf{Ethics approval:} Not applicable.
+\item \textbf{Data availability:} % TODO: Statement about dataset availability.
+\item \textbf{Code availability:} % TODO: Statement about code/repository availability.
+\item \textbf{Author contributions:} J.C.\ conceived the study, implemented all models and experiments, performed the analysis, and wrote the manuscript.
+\end{itemize}
+
+%%==================================%%
+%% REFERENCES
+%%==================================%%
+
+\bibliography{sn-bibliography}
+
+\end{document}

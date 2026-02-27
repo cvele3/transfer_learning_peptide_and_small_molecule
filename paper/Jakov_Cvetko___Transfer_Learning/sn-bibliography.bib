@@ -1,0 +1,302 @@
+%%============================================================================%%
+%% Bibliography for: Toxicity Classification for Small Molecules and Peptides
+%% Author: Jakov Cvetko
+%% Style: sn-nature.bst (Nature Portfolio numbered references)
+%%
+%% Organisation:
+%%   A. References currently cited in paper_draft.tex (Introduction)
+%%   B. Additional references for Methods, Results, Discussion sections
+%%============================================================================%%
+
+%%============================%%
+%% A. CURRENTLY CITED IN TEXT %%
+%%============================%%
+
+%% [1] ToxinPred — DPC+SVM peptide toxicity prediction (comparison baseline)
+@article{gupta2013toxinpred,
+  author    = {Gupta, Sudheer and Kapoor, Pallavi and Chaudhary, Kumardeep
+               and Gautam, Ankur and Kumar, Rahul and {Open Source Drug
+               Discovery Consortium} and Raghava, Gajendra P. S.},
+  title     = {In Silico Approach for Predicting Toxicity of Peptides and
+               Proteins},
+  journal   = {PLoS ONE},
+  volume    = {8},
+  number    = {9},
+  pages     = {e73957},
+  year      = {2013},
+  doi       = {10.1371/journal.pone.0073957}
+}
+
+%% [2] Neural Message Passing — foundational GNN framework for molecules
+@inproceedings{gilmer2017mpnn,
+  author    = {Gilmer, Justin and Schoenholz, Samuel S. and Riley, Patrick F.
+               and Vinyals, Oriol and Dahl, George E.},
+  title     = {Neural Message Passing for Quantum Chemistry},
+  booktitle = {Proceedings of the 34th International Conference on Machine
+               Learning (ICML)},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {70},
+  pages     = {1263--1272},
+  publisher = {PMLR},
+  year      = {2017}
+}
+
+%% [3] DGCNN — the architecture used in this study
+@inproceedings{zhang2018deepgraphcnn,
+  author    = {Zhang, Muhan and Cui, Zhicheng and Neumann, Marion and
+               Chen, Yixin},
+  title     = {An End-to-End Deep Learning Architecture for Graph
+               Classification},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume    = {32},
+  number    = {1},
+  pages     = {4438--4445},
+  year      = {2018},
+  doi       = {10.1609/aaai.v32i1.11782}
+}
+
+%% [4] Transfer learning survey — canonical reference
+@article{pan2010transfer,
+  author    = {Pan, Sinno Jialin and Yang, Qiang},
+  title     = {A Survey on Transfer Learning},
+  journal   = {IEEE Transactions on Knowledge and Data Engineering},
+  volume    = {22},
+  number    = {10},
+  pages     = {1345--1359},
+  year      = {2010},
+  doi       = {10.1109/TKDE.2009.191}
+}
+
+%% [5] Statistical comparisons of classifiers — Friedman + Nemenyi
+@article{demsar2006statistical,
+  author    = {Dem\v{s}ar, Janez},
+  title     = {Statistical Comparisons of Classifiers over Multiple Data Sets},
+  journal   = {Journal of Machine Learning Research},
+  volume    = {7},
+  pages     = {1--30},
+  year      = {2006}
+}
+
+%%============================================%%
+%% B. ADDITIONAL REFERENCES (for future use)  %%
+%%============================================%%
+
+%% --- Molecular representation ---
+
+%% SMILES notation — original paper
+@article{weininger1988smiles,
+  author    = {Weininger, David},
+  title     = {{SMILES}, a Chemical Language and Information System.
+               1.\ {I}ntroduction to Methodology and Encoding Rules},
+  journal   = {Journal of Chemical Information and Computer Sciences},
+  volume    = {28},
+  number    = {1},
+  pages     = {31--36},
+  year      = {1988},
+  doi       = {10.1021/ci00057a005}
+}
+
+%% RDKit — cheminformatics toolkit
+@misc{rdkit,
+  author       = {{RDKit: Open-Source Cheminformatics}},
+  title        = {{RDKit}: Open-Source Cheminformatics Software},
+  year         = {2022},
+  howpublished = {\url{https://www.rdkit.org}},
+  note         = {Version 2022.9.5}
+}
+
+%% --- Graph neural networks ---
+
+%% Semi-supervised GCN — foundational GNN reference
+@inproceedings{kipf2017gcn,
+  author    = {Kipf, Thomas N. and Welling, Max},
+  title     = {Semi-Supervised Classification with Graph Convolutional
+               Networks},
+  booktitle = {Proceedings of the 5th International Conference on Learning
+               Representations (ICLR)},
+  year      = {2017}
+}
+
+%% Strategies for pre-training GNNs — transfer learning on graphs
+@inproceedings{hu2020pretraining,
+  author    = {Hu, Weihua and Liu, Bowen and Gomes, Joseph and
+               Zitnik, Marinka and Liang, Percy and Pande, Vijay and
+               Leskovec, Jure},
+  title     = {Strategies for Pre-Training Graph Neural Networks},
+  booktitle = {Proceedings of the 8th International Conference on Learning
+               Representations (ICLR)},
+  year      = {2020}
+}
+
+%% StellarGraph — GNN library used in this project
+@misc{stellargraph,
+  author       = {{Data61, CSIRO}},
+  title        = {{StellarGraph} Machine Learning Library},
+  year         = {2018},
+  howpublished = {\url{https://github.com/stellargraph/stellargraph}},
+  note         = {Version 1.2.1}
+}
+
+%% --- Molecular benchmarks ---
+
+%% MoleculeNet — molecular ML benchmark
+@article{wu2018moleculenet,
+  author    = {Wu, Zhenqin and Ramsundar, Bharath and Feinberg, Evan N. and
+               Gomes, Joseph and Geniesse, Caleb and Pappu, Aneesh S. and
+               Leswing, Karl and Pande, Vijay},
+  title     = {{MoleculeNet}: A Benchmark for Molecular Machine Learning},
+  journal   = {Chemical Science},
+  volume    = {9},
+  number    = {2},
+  pages     = {513--530},
+  year      = {2018},
+  doi       = {10.1039/C7SC02664A}
+}
+
+%% --- Transfer learning ---
+
+%% How transferable are features — layer-wise transferability analysis
+@inproceedings{yosinski2014transferable,
+  author    = {Yosinski, Jason and Clune, Jeff and Bengio, Yoshua and
+               Lipson, Hod},
+  title     = {How Transferable Are Features in Deep Neural Networks?},
+  booktitle = {Advances in Neural Information Processing Systems 27 (NeurIPS)},
+  pages     = {3320--3328},
+  year      = {2014}
+}
+
+%% --- Deep learning tools ---
+
+%% TensorFlow
+@inproceedings{tensorflow,
+  author    = {Abadi, Mart\'{\i}n and Barham, Paul and Chen, Jianmin and
+               Chen, Zhifeng and Davis, Andy and Dean, Jeffrey and
+               Devin, Matthieu and Ghemawat, Sanjay and Irving, Geoffrey
+               and Isard, Michael and others},
+  title     = {{TensorFlow}: A System for Large-Scale Machine Learning},
+  booktitle = {Proceedings of the 12th USENIX Symposium on Operating Systems
+               Design and Implementation (OSDI)},
+  pages     = {265--283},
+  year      = {2016}
+}
+
+%% Adam optimizer
+@inproceedings{kingma2015adam,
+  author    = {Kingma, Diederik P. and Ba, Jimmy},
+  title     = {Adam: A Method for Stochastic Optimization},
+  booktitle = {Proceedings of the 3rd International Conference on Learning
+               Representations (ICLR)},
+  year      = {2015}
+}
+
+%% --- Evaluation metrics ---
+
+%% MCC — original paper
+@article{matthews1975mcc,
+  author    = {Matthews, B. W.},
+  title     = {Comparison of the Predicted and Observed Secondary Structure
+               of {T4} Phage Lysozyme},
+  journal   = {Biochimica et Biophysica Acta (BBA) -- Protein Structure},
+  volume    = {405},
+  number    = {2},
+  pages     = {442--451},
+  year      = {1975},
+  doi       = {10.1016/0005-2795(75)90109-9}
+}
+
+%% MCC advantages over F1 and accuracy
+@article{chicco2020mcc,
+  author    = {Chicco, Davide and Jurman, Giuseppe},
+  title     = {The Advantages of the {Matthews} Correlation Coefficient
+               ({MCC}) over {F1} Score and Accuracy in Binary Classification
+               Evaluation},
+  journal   = {BMC Genomics},
+  volume    = {21},
+  pages     = {6},
+  year      = {2020},
+  doi       = {10.1186/s12864-019-6413-7}
+}
+
+%% --- Statistical testing ---
+
+%% Original Friedman test
+@article{friedman1937,
+  author    = {Friedman, Milton},
+  title     = {The Use of Ranks to Avoid the Assumption of Normality
+               Implicit in the Analysis of Variance},
+  journal   = {Journal of the American Statistical Association},
+  volume    = {32},
+  number    = {200},
+  pages     = {675--701},
+  year      = {1937},
+  doi       = {10.1080/01621459.1937.10503522}
+}
+
+%% --- SVM / classical ML ---
+
+%% scikit-learn
+@article{pedregosa2011sklearn,
+  author    = {Pedregosa, Fabian and Varoquaux, Ga{\"e}l and Gramfort,
+               Alexandre and Michel, Vincent and Thirion, Bertrand and
+               Grisel, Olivier and Blondel, Mathieu and Prettenhofer, Peter
+               and Weiss, Ron and Dubourg, Vincent and others},
+  title     = {Scikit-learn: Machine Learning in {Python}},
+  journal   = {Journal of Machine Learning Research},
+  volume    = {12},
+  pages     = {2825--2830},
+  year      = {2011}
+}
+
+%% Support vector machines — original paper
+@article{cortes1995svm,
+  author    = {Cortes, Corinna and Vapnik, Vladimir},
+  title     = {Support-Vector Networks},
+  journal   = {Machine Learning},
+  volume    = {20},
+  number    = {3},
+  pages     = {273--297},
+  year      = {1995},
+  doi       = {10.1007/BF00994018}
+}
+
+%% SVMlight — used in original ToxinPred paper
+@incollection{joachims1999svm,
+  author    = {Joachims, Thorsten},
+  title     = {Making Large-Scale {SVM} Learning Practical},
+  editor    = {Sch{\"o}lkopf, Bernhard and Burges, Christopher J. C. and
+               Smola, Alexander J.},
+  booktitle = {Advances in Kernel Methods --- Support Vector Learning},
+  pages     = {169--184},
+  publisher = {MIT Press},
+  address   = {Cambridge, MA},
+  year      = {1999}
+}
+
+%% --- Toxicity prediction / drug discovery context ---
+
+%% Tox21 challenge — toxicity prediction benchmark
+@article{huang2016tox21,
+  author    = {Huang, Ruili and Xia, Menghang and Nguyen, Dac-Trung and
+               Zhao, Tongan and Sakamuru, Srilatha and Zhao, Jinghua and
+               Shahane, Sampada A. and Rossoshek, Anna and Simeonov, Anton},
+  title     = {Tox21Challenge to Build Predictive Models of Nuclear Receptor
+               and Stress Response Pathways as Mediated by Exposure to
+               Environmental Chemicals and Drugs},
+  journal   = {Frontiers in Environmental Science},
+  volume    = {3},
+  pages     = {85},
+  year      = {2016},
+  doi       = {10.3389/fenvs.2015.00085}
+}
+
+%% Therapeutic peptides review
+@article{fosgerau2015peptide,
+  author    = {Fosgerau, Keld and Hoffmann, Torsten},
+  title     = {Peptide Therapeutics: Current Status and Future Directions},
+  journal   = {Drug Discovery Today},
+  volume    = {20},
+  number    = {1},
+  pages     = {122--128},
+  year      = {2015},
+  doi       = {10.1016/j.drudis.2014.10.003}
+}

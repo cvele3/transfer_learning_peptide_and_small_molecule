@@ -1,0 +1,6 @@
+Koliko učinkovito možemo primijeniti metode transfer learninga između dviju različitih domena toksikoloških podataka (peptidi i male molekule) koristeći DGCNN arhitekturu?
+Koje od četiri istražene metode transfer learninga pokazuju najbolje performanse u klasifikaciji toksičnosti kada se model pretrenirane jedne domene prenosi u drugu domenu?
+Postoji li statistički značajna razlika u performansama modela koji koriste transfer learning u odnosu na baseline modele trenirane isključivo unutar iste domene?
+Utječe li smjer transfer learninga (peptid → male molekule naspram male molekule → peptidi) na učinkovitost i rezultate modela?
+Koje su moguće implikacije korištenja transfer learning pristupa u području predviđanja toksičnosti molekula?
+Usporedba dobivenih modela sa modelim iz znanstvenih radova koji su temeljeni na istim domenama?
