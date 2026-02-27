@@ -7,7 +7,7 @@
 ## Design Principles
 
 - **Horizontal flow**, left → right, one single row of major stages
-- **Maximum 6–7 columns** (one per stage)
+- **Maximum 5–6 columns** (one per stage)
 - **Small icons** with short 2–4 word labels underneath — no paragraphs inside shapes
 - **Thin vertical separator lines** between stages with a stage title at the top of each column
 - **Light muted colors** — no heavy fills, mostly white shapes with subtle colored accents
@@ -16,19 +16,23 @@
 
 ---
 
-## The 6 Columns (Left to Right)
+## The 5 Columns (Left to Right)
 
 ```
-  Datasets        Preprocessing       Source Models       Target Training        Cross-validation       Evaluation
-     │                  │                   │                    │                      │                    │
-     ▼                  ▼                   ▼                    ▼                      ▼                    ▼
- ┌────────┐       ┌──────────┐        ┌──────────┐        ┌──────────┐          ┌──────────┐         ┌──────────┐
- │  🗄️🗄️  │       │  ⬡→📊   │        │  🧠🧠   │        │ 🧠×5     │          │  🔄      │         │  📋      │
- │        │──────►│          │───────►│          │───────►│          │─────────►│          │────────►│          │
- │ 2 XLSX │       │ SMILES   │        │ Overtrain│        │ Baseline │          │ 10-fold  │         │ 6 Metrics│
- │ files  │       │ to Graph │        │ on 100%  │        │ + 4 TL   │          │ stratif. │         │ + Stats  │
- └────────┘       └──────────┘        └──────────┘        │ methods  │          └──────────┘         └──────────┘
-                                                          └──────────┘
+  Datasets        Preprocessing       Source Models       Target Training        Evaluation
+     │                  │                   │                    │                    │
+     ▼                  ▼                   ▼                    ▼                    ▼
+ ┌────────┐       ┌──────────┐        ┌──────────┐        ┌──────────┐         ┌──────────┐
+ │  🗄️🗄️  │       │  ⬡→📊   │        │  🧠🧠   │        │ 🧠×5     │         │  📋      │
+ │        │──────►│          │───────►│          │───────►│          │────────►│          │
+ │ 2 XLSX │       │ SMILES   │        │ Overtrain│        │ Baseline │         │ 6 Metrics│
+ │ files  │       │ to Graph │        │ on 100%  │        │ + 4 TL   │         │ + Stats  │
+ └────────┘       │          │        │          │        │ methods  │         └──────────┘
+                 │ Node +   │        └──────────┘        │ (10-fold │
+                 │ Edge     │                             │   CV)    │
+                 │ Features │                             └──────────┘
+                 │ (72 vocab)│
+                 └──────────┘
 ```
 
 ---
@@ -54,7 +58,7 @@
 
 ### Column 2: Preprocessing
 
-**What the viewer should understand:** "Molecules are converted from text (SMILES) into graphs."
+**What the viewer should understand:** "Molecules are converted from text (SMILES) into graphs with node and edge features."
 
 | Property | Value |
 |----------|-------|
@@ -62,9 +66,11 @@
 | **Icon idea** | A tiny hexagon (molecule) with an arrow pointing to a tiny node-edge sketch (graph) — or simply use draw.io's "hierarchy" / "network" icon |
 | **Label** | "SMILES → Graph" |
 | **Small annotation below** | "RDKit + StellarGraph" |
-| **Second small element** | A tiny rounded rect below: "Shared atom vocabulary (27 elements)" |
+| **Second small element** | A tiny rounded rect below: "One-hot encoding (72-element vocab)" |
+| **Third small element** | A tiny rounded rect below: "Node features: element (72) + atomic props (5)" |
+| **Fourth small element** | A tiny rounded rect below: "Edge features: bond type (4) + bond props (3)" |
 | **Fill** | White with light green border (`#D5E8D4`) |
-| **Size** | ~100×50px main shape |
+| **Size** | ~100×80px main shape (taller to accommodate multiple annotations) |
 
 **Column title above:** "Preprocessing" (bold, 12pt)
 
@@ -90,7 +96,7 @@
 
 ### Column 4: Target Training
 
-**What the viewer should understand:** "We train 5 model variants — 1 baseline from scratch + 4 using transferred weights."
+**What the viewer should understand:** "We train 5 model variants — 1 baseline from scratch + 4 using transferred weights. Each model is trained using 10-fold cross-validation for fair comparison."
 
 | Property | Value |
 |----------|-------|
@@ -101,30 +107,15 @@
 | **Incoming dashed orange arrow** | From Column 3 to M1–M4 only (NOT to Baseline) — labeled "Transfer weights" |
 | **Size per method rect** | ~120×20px |
 | **Container** | Light gray dashed box around all 5 |
+| **Small annotation below container** | "10-fold stratified CV (shared splits)" — italic, gray, 9pt |
 
 **Column title above:** "Target Training" (bold, 12pt)
 
-**Key visual detail:** The **baseline** has NO incoming arrow from Source Models — only M1–M4 do. This visually communicates that baseline starts from scratch while TL methods receive pretrained weights.
+**Key visual detail:** The **baseline** has NO incoming arrow from Source Models — only M1–M4 do. This visually communicates that baseline starts from scratch while TL methods receive pretrained weights. The annotation below indicates that all models use the same 10-fold cross-validation splits for fair comparison.
 
 ---
 
-### Column 5: Cross-validation
-
-**What the viewer should understand:** "Each model is trained and tested across 10 folds for fair comparison."
-
-| Property | Value |
-|----------|-------|
-| **Shape** | 1 × **Circular arrow** icon (loop/recycle symbol) |
-| **Label** | "10-fold CV" |
-| **Small annotation below** | "Stratified, shared splits" |
-| **Fill** | White with gray border |
-| **Size** | ~60×60px (circular shape) |
-
-**Column title above:** "Cross-validation" (bold, 12pt)
-
----
-
-### Column 6: Evaluation
+### Column 5: Evaluation
 
 **What the viewer should understand:** "Models are compared using metrics and statistical tests."
 
@@ -162,7 +153,7 @@ Below the main row, add a **thin horizontal strip** showing that the whole pipel
 | **Inside** | Two horizontal arrows: one left→right labeled "Peptide → Small Mol.", one right→left labeled "Small Mol. → Peptide" |
 | **Below arrows** | Text: "× 3 model size configurations" |
 | **Fill** | Very light gray (`#FAFAFA`), thin border |
-| **Height** | ~60px, same width as the 6 columns together |
+| **Height** | ~60px, same width as the 5 columns together |
 
 ---
 
@@ -171,24 +162,26 @@ Below the main row, add a **thin horizontal strip** showing that the whole pipel
 This is exactly what the final draw.io diagram should look like:
 
 ```
-  Datasets       Preprocessing     Source Models     Target Training      Cross-validation    Evaluation
-     │                │                  │                  │                    │                 │
-     ▼                ▼                  ▼                  ▼                    ▼                 ▼
- ┌────────┐     ┌───────────┐     ┌───────────┐     ┌──────────────┐     ┌───────────┐     ┌──────────┐
- │        │     │           │     │           │     │              │     │           │     │ ROC-AUC  │
- │ 🗄️     │     │ SMILES    │     │ Peptide   │     │ Baseline     │     │           │     │ G-Mean   │
- │Peptide │     │   →       │     │ source    │     │ ─────────── │     │  🔄 10    │     │ Precis.  │
- │ .xlsx  │────►│ Graph     │────►│ model     │  ┌─►│ M1: Fr. GNN │────►│  fold     │────►│ Recall   │
- │        │     │           │     │           │  │  │ M2: Fr. Read│     │  CV       │     │ F1       │
- │ 🗄️     │     │ (RDKit +  │     │ Small mol │  │  │ M3: Fr. All │     │           │     │ MCC      │
- │SmallMol│     │  Stellar  │     │ source    │──┘  │ M4: Gradual │     │(stratif.) │     │──────────│
- │ .xlsx  │     │  Graph)   │     │ model     │     │              │     │           │     │ Friedman │
- │        │     │           │     │           │     │              │     │           │     │ Nemenyi  │
- └────────┘     │ Vocab: 27 │     │(100% data │     └──────────────┘     └───────────┘     └──────────┘
-                │ elements  │     │ 90/10)    │           ▲
-                └───────────┘     └───────────┘           │
-                                                    dashed orange
-                                                    arrow = weight
+  Datasets       Preprocessing     Source Models     Target Training      Evaluation
+     │                │                  │                  │                 │
+     ▼                ▼                  ▼                  ▼                 ▼
+ ┌────────┐     ┌───────────┐     ┌───────────┐     ┌──────────────┐     ┌──────────┐
+ │        │     │           │     │           │     │              │     │ ROC-AUC  │
+ │ 🗄️     │     │ SMILES    │     │ Peptide   │     │ Baseline     │     │ G-Mean   │
+ │Peptide │     │   →       │     │ source    │     │ ─────────── │     │ Precis.  │
+ │ .xlsx  │────►│ Graph     │────►│ model     │  ┌─►│ M1: Fr. GNN │────►│ Recall   │
+ │        │     │           │     │           │  │  │ M2: Fr. Read│     │ F1       │
+ │ 🗄️     │     │ (RDKit +  │     │ Small mol │  │  │ M3: Fr. All │     │ MCC      │
+ │SmallMol│     │  Stellar  │     │ source    │──┘  │ M4: Gradual │     │──────────│
+ │ .xlsx  │     │  Graph)   │     │ model     │     │              │     │ Friedman │
+ │        │     │           │     │           │     │              │     │ Nemenyi  │
+ └────────┘     │ Node+Edge │     │(100% data │     │ 10-fold CV   │     └──────────┘
+                │ Features  │     │ 90/10)    │     │ (shared)     │           ▲
+                │ (72 vocab)│     └───────────┘     └──────────────┘           │
+                └───────────┘
+                                                          ▲                    │
+                                                    dashed orange          Results
+                                                    arrow = weight         aggregation
                                                     transfer (M1-M4
                                                     only, NOT baseline)
 
@@ -206,7 +199,7 @@ This is exactly what the final draw.io diagram should look like:
 
 1. **Canvas:** File → Page Setup → **A4 Landscape** or **Letter Landscape**
 
-2. **Draw 6 thin vertical dashed lines** spaced equally to create 6 columns. Add column titles at the very top in **bold 12pt**.
+2. **Draw 5 thin vertical dashed lines** spaced equally to create 5 columns. Add column titles at the very top in **bold 12pt**.
 
 3. **Column 1 — Datasets:**
    - Place 2 cylinders (General → Cylinder) stacked vertically, light blue border
@@ -217,7 +210,9 @@ This is exactly what the final draw.io diagram should look like:
    - One rounded rectangle, light green border
    - Label: "SMILES → Graph"
    - Tiny text: "RDKit + StellarGraph"
-   - Below: small rounded rect "Shared vocabulary (27)"
+   - Below: small rounded rect "One-hot encoding (72-element vocab)"
+   - Below: small rounded rect "Node features: element (72) + atomic props (5)"
+   - Below: small rounded rect "Edge features: bond type (4) + bond props (3)"
 
 5. **Column 3 — Source Models:**
    - 2 rectangles with thick border, light orange border
@@ -230,13 +225,9 @@ This is exactly what the final draw.io diagram should look like:
    - Top one (Baseline): blue border, label "Baseline"
    - Bottom four (M1–M4): orange border, short method names
    - **Dashed orange arrow** from Column 3 entering ONLY the M1–M4 group (skipping Baseline)
+   - **Small annotation below container** (italic, gray, 9pt): "10-fold stratified CV (shared splits)"
 
-7. **Column 5 — Cross-validation:**
-   - A circular arrow / loop icon
-   - Label: "10-fold CV"
-   - Tiny text: "Stratified, shared splits"
-
-8. **Column 6 — Evaluation:**
+7. **Column 5 — Evaluation:**
    - Rectangle listing the 6 metrics
    - Small rectangle below: "Friedman + Nemenyi"
 
@@ -252,7 +243,6 @@ This is exactly what the final draw.io diagram should look like:
 11. **Legend (tiny, bottom-right):**
     - 🗄️ Cylinder = dataset
     - ▭ Rectangle = model/process
-    - 🔄 Loop = cross-validation
     - Dashed orange arrow = weight transfer
     - Solid arrow = pipeline flow
 
@@ -263,12 +253,11 @@ This is exactly what the final draw.io diagram should look like:
 An outsider looking at this diagram will immediately understand:
 
 1. **"There are two datasets"** (two cylinders on the left)
-2. **"Molecules get converted into something the computer can read"** (preprocessing column)
+2. **"Molecules get converted into graphs with rich features"** (preprocessing column — shows node features with 72-element vocabulary + atomic properties, and edge features with bond types + bond properties)
 3. **"A model is first trained on all data"** (source models)
-4. **"Then 5 different approaches are tried"** (target training — baseline + 4 methods)
+4. **"Then 5 different approaches are tried, each using 10-fold cross-validation"** (target training — baseline + 4 methods, with CV annotation)
 5. **"The orange arrow means some methods reuse knowledge from step 3"** (transfer learning)
-6. **"Everything is tested fairly with cross-validation"** (loop icon)
-7. **"Results are measured and compared"** (evaluation metrics)
-8. **"This is done in both directions"** (bottom row)
+6. **"Results are measured and compared"** (evaluation metrics)
+7. **"This is done in both directions"** (bottom row)
 
 No deep knowledge of machine learning or chemistry is required to get this overview.
